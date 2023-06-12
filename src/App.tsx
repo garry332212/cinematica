@@ -18,6 +18,6 @@ export default App;
 
 const AppWrapper = styled.div`
   .header {
-    margin-bottom: 10rem;
+    margin-bottom:8rem;
   }
 `;

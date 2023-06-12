@@ -1,17 +1,39 @@
-import React from 'react'
-import MoviesCard from '../../MoviesCard'
-
+import MoviesCard from "../../MoviesCard";
+import CarouselComponent from "../Carousel";
+import { styled } from "styled-components";
+import { MovieProvider } from "../MovieContext";
+import {
+  apiKey,
+  popular,
+  this_week,
+  top_rated_movies,
+  upcoming,
+} from "../modules/ApiLinks";
 
 const Home = () => {
-    const apiKey = "a2006311928939b35613c28405038c87";
   return (
     <>
-     
-      <MoviesCard apiEndpoint={`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`}/>
-      <MoviesCard apiEndpoint={`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`}/>
-      <MoviesCard apiEndpoint={`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`}/>
+      <ImageSlider>
+        <MovieProvider apiEndpoint={this_week}>
+          <CarouselComponent />
+        </MovieProvider>
+      </ImageSlider>
+
+      <MoviesCard apiEndpoint={`${upcoming}?api_key=${apiKey}`} />
+      <MoviesCard apiEndpoint={`${this_week}?api_key=${apiKey}`} />
+      <MoviesCard apiEndpoint={`${popular}?api_key=${apiKey}`} />
+      <MoviesCard apiEndpoint={`${top_rated_movies}?api_key=${apiKey}`} />
     </>
-  )
+  );
+};
+
+export default Home;
+
+const ImageSlider = styled.div`
+  margin-bottom: 3rem;
+
+  .slick-slider {
+  border-radius: 10px;
 }
 
-export default Home
+`;
