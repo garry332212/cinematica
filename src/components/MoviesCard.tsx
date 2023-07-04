@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { colors, fontFamily, sizes } from "./modules/themes";
 
 interface Movie {
   id: number;
@@ -14,9 +15,11 @@ interface Movie {
 
 interface DataProps {
   apiEndpoint: string;
+  categoryName: string;
+  subName?: string;
 }
 
-const Data: React.FC<DataProps> = ({ apiEndpoint }) => {
+const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -59,31 +62,32 @@ const Data: React.FC<DataProps> = ({ apiEndpoint }) => {
 
   return (
     <MovieWrapper>
-      <div className="main">
-        {loading && <LoadingOverlay>Loading...</LoadingOverlay>}{" "}
-        {/* Conditionally render the loading overlay */}
-        <div className="movieCard">
-          {movies.map((movie) => {
-            // Calculate the percentage
-            const percentage = (movie.vote_average / 10) * 100;
-            return (
-              <div className="movie" key={movie.id}>
-                <div className="movieImg">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                    alt=""
-                  />
-                  <span>{percentage.toFixed(0)}%</span>
-                </div>
-
-                <div className="movieInfo">
-                  <h4>{movie.title}</h4>
-                  <p>{getFormattedDate(movie.release_date)}</p>
-                </div>
+      {loading && <LoadingOverlay>Loading...</LoadingOverlay>}{" "}
+      {/* Conditionally render the loading overlay */}
+      <h1>
+        {categoryName} <span>{subName}</span>
+      </h1>
+      <div className="movieCard">
+        {movies.map((movie) => {
+          // Calculate the percentage
+          const percentage = (movie.vote_average / 10) * 100;
+          return (
+            <div className="movie" key={movie.id}>
+              <div className="movieImg">
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  alt=""
+                />
+                <span>{percentage.toFixed(0)}%</span>
               </div>
-            );
-          })}
-        </div>
+
+              <div className="movieInfo">
+                <h4>{movie.title}</h4>
+                <p>{getFormattedDate(movie.release_date)}</p>
+              </div>
+            </div>
+          );
+        })}
         <div className="btns">
           <button onClick={prevPage}>⬅ Previous</button>
           <button onClick={nextPage}>Next ➡</button>
@@ -96,22 +100,29 @@ const Data: React.FC<DataProps> = ({ apiEndpoint }) => {
 export default Data;
 
 const MovieWrapper = styled.div`
-  border-bottom: 5px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: ${sizes.large};
+  flex-direction: column;
+  box-shadow: 1px 1px 13px 2px #f3614010;
+  border-radius: 10px;
 
-  margin-bottom: 3rem;
-  .main {
-    width: 90%;
-    margin: auto;
-  }
   h1 {
     position: relative;
-    left: 130px;
+    left: 70px;
+    font-family: ${fontFamily.Acme};
+    >span{
+      font-size: ${sizes.medium};
+      font-family: ${fontFamily.roboto};
+      font-weight: 400;
+    }
   }
 
   .movieCard {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
   }
 
@@ -131,6 +142,7 @@ const MovieWrapper = styled.div`
     > img {
       border-radius: 10px;
       border-bottom-right-radius: 22px;
+      box-shadow: 1px 1px 10px 1px #000000;
     }
     > span {
       border: none;
@@ -154,9 +166,10 @@ const MovieWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+
     > h4 {
       margin-bottom: 0;
-      width: 220px;
+      width: 230px;
     }
     > p {
       margin: 8px 5px;
@@ -167,13 +180,14 @@ const MovieWrapper = styled.div`
   .btns {
     display: flex;
     justify-content: space-between;
+    width: 90%;
     margin: 2rem;
     > button {
       border: none;
       height: 30px;
       width: 100px;
       border-radius: 5px;
-      background: #f76429;
+      background: ${colors.appOrange};
       color: white;
       font-weight: bolder;
       cursor: pointer;
