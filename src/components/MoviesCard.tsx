@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { colors, fontFamily, sizes } from "./modules/themes";
 
-interface Movie {
+interface Movie {                                                    
   id: number;
   overview: string;
   title: string;
@@ -21,26 +21,26 @@ interface DataProps {
 
 const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  // const [page, setPage] = useState(1);
+  //const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      setLoading(true); // Set loading to true before making the API request
+      //setLoading(true); // Set loading to true before making the API request
 
       try {
-        const response = await axios.get(`${apiEndpoint}&page=${page}`);
+        const response = await axios.get(`${apiEndpoint}`); //&page=${page}  removed
         const moviesData = response.data.results.slice(0, 7);
         setMovies(moviesData);
-        setLoading(false); // Set loading to false after receiving the data
+       // setLoading(false); // Set loading to false after receiving the data
       } catch (error) {
         console.error("Error fetching movies:", error);
-        setLoading(false); // Set loading to false in case of an error
+        //setLoading(false); // Set loading to false in case of an error
       }
     };
 
     fetchMovies();
-  }, [apiEndpoint, page]);
+  }, [apiEndpoint]);
 
   function getFormattedDate(dateString: string | number | Date) {
     const options = {
@@ -52,21 +52,22 @@ const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
     return date.toLocaleDateString("en-US", options);
   }
 
-  const nextPage = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
+  // const nextPage = () => {
+  //   setPage((prevPage) => prevPage + 1);
+  // };
 
-  const prevPage = () => {
-    setPage((prevPage) => prevPage - 1);
-  };
+  // const prevPage = () => {
+  //   setPage((prevPage) => prevPage - 1);
+  // };
 
   return (
     <MovieWrapper>
-      {loading && <LoadingOverlay>Loading...</LoadingOverlay>}{" "}
-      {/* Conditionally render the loading overlay */}
+      <div className="titleCard">
       <h1>
         {categoryName} <span>{subName}</span>
       </h1>
+      </div>
+    
       <div className="movieCard">
         {movies.map((movie) => {
           // Calculate the percentage
@@ -88,10 +89,10 @@ const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
             </div>
           );
         })}
-        <div className="btns">
+        {/* <div className="btns">
           <button onClick={prevPage}>⬅ Previous</button>
           <button onClick={nextPage}>Next ➡</button>
-        </div>
+        </div> */}
       </div>
     </MovieWrapper>
   );
@@ -102,15 +103,18 @@ export default Data;
 const MovieWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   margin: ${sizes.large};
   flex-direction: column;
   box-shadow: 1px 1px 13px 2px #f3614010;
   border-radius: 10px;
 
+  .titleCard{
+    width: 100%;
+ >
+
   h1 {
-    position: relative;
-    left: 70px;
+  margin: 10px 50px;
     font-family: ${fontFamily.Acme};
     >span{
       font-size: ${sizes.medium};
@@ -118,6 +122,7 @@ const MovieWrapper = styled.div`
       font-weight: 400;
     }
   }
+}
 
   .movieCard {
     display: flex;
@@ -195,18 +200,18 @@ const MovieWrapper = styled.div`
   }
 `;
 
-const LoadingOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 24px;
-  z-index: 9999;
-`;
+// const LoadingOverlay = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   color: #ffffff;
+//   font-weight: bold;
+//   font-size: 24px;
+//   z-index: 9999;
+// `;
