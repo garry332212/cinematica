@@ -13,7 +13,8 @@ const colors = {
 const fontFamily = {
   roboto: "'Roboto', sans-serif",
   shadowsIntoLight: "'Shadows Into Light', cursive",
-  Acme: "'Acme', sans-serif;",
+  Acme: "'Acme', sans-serif",
+  rating: "'Agdasima', sans-serif"
   
   
 };

@@ -6,18 +6,22 @@ import Home from "./components/pages/Home";
 function App() {
   return (
     <AppWrapper>
-      <div className="header">
+      <HeaderWrapper>
         <Header />
-      </div>
-      <Home />
+      </HeaderWrapper>
+      <HomeWrapper>
+        <Home />
+      </HomeWrapper>
     </AppWrapper>
   );
 }
 
-export default App;
+const AppWrapper = styled.div``;
 
-const AppWrapper = styled.div`
-  .header {
-    margin-bottom:8rem;
-  }
+const HeaderWrapper = styled.div`
+  padding-bottom: 4rem; 
 `;
+
+const HomeWrapper = styled.div``;
+
+export default App;

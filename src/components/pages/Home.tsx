@@ -12,8 +12,6 @@ import {
 const Home = () => {
   return (
     <>
-   
-
       <MoviesCard apiEndpoint={`${trending}?api_key=${apiKey}`} categoryName="Trending"/>
       <MoviesCard apiEndpoint={`${upcoming}?api_key=${apiKey}`} categoryName="Upcoming"/>
       <MoviesCard apiEndpoint={`${this_week}?api_key=${apiKey}`} categoryName="This Week"/>
