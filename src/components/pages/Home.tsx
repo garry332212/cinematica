@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard";
-import {  Cover } from "../styles.modules"
+import { Cover, HomeContainer, SearchBar } from "../styles.modules";
 import {
   apiKey,
   popular,
@@ -31,25 +31,52 @@ const Home = () => {
       });
   }, []);
   return (
-    <>
-    <Cover>
-      <div className="coverText">
-        <h1>Welcome</h1>
-        <p>Millions of movies, TV shows and people to discover. Explore now.</p>
-      </div>
-      
-    <img src={headerImage} alt="" />
-    </Cover>
-   
-      <MoviesCard apiEndpoint={`${trending}?api_key=${apiKey}`} categoryName="Trending"/>
-      <MoviesCard apiEndpoint={`${upcoming}?api_key=${apiKey}`} categoryName="Upcoming"/>
-      <MoviesCard apiEndpoint={`${this_week}?api_key=${apiKey}`} categoryName="This Week"/>
-      <MoviesCard apiEndpoint={`${popular}?api_key=${apiKey}`} categoryName="Popular Movies"/>
-      <MoviesCard apiEndpoint={`${top_rated_movies}?api_key=${apiKey}`} categoryName="Top Rated Movies" subName="(All Time Hits)"/>
-    </>
+    <HomeContainer>
+      <Cover>
+        <div className="coverText">
+          <h1>Welcome to Cinematica</h1>
+          <p>
+            Explore the World of Cinema: Movie and TV Show Insights at Your
+            Fingertips.
+          </p>
+          <em>
+            "All You Need to Know about Movies and TV Shows: A Comprehensive
+            Resource"
+          </em>
+        </div>
+
+        <img src={headerImage} alt="" />
+        <SearchBar>
+          <input
+            type="search"
+            placeholder="Search for movies, Tv shows and more..."
+          />
+        </SearchBar>
+      </Cover>
+
+      <MoviesCard
+        apiEndpoint={`${trending}?api_key=${apiKey}`}
+        categoryName="Trending"
+      />
+      <MoviesCard
+        apiEndpoint={`${upcoming}?api_key=${apiKey}`}
+        categoryName="Upcoming"
+      />
+      <MoviesCard
+        apiEndpoint={`${this_week}?api_key=${apiKey}`}
+        categoryName="This Week"
+      />
+      <MoviesCard
+        apiEndpoint={`${popular}?api_key=${apiKey}`}
+        categoryName="Popular Movies"
+      />
+      <MoviesCard
+        apiEndpoint={`${top_rated_movies}?api_key=${apiKey}`}
+        categoryName="Top Rated Movies"
+        subName="(All Time Hits)"
+      />
+    </HomeContainer>
   );
 };
 
 export default Home;
-
-

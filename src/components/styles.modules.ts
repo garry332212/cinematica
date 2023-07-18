@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { fontFamily, sizes } from "./modules/themes";
 
+export const HomeContainer = styled.div``;
+
 //*HEADER Styles Starts
 export const NavbarWrapper = styled.div`
   display: flex;
@@ -83,20 +85,27 @@ export const NavbarWrapper = styled.div`
   }
 `;
 
-//!Cover Image
+//!Cover Image @HomePage
 export const Cover = styled.div`
   text-align: center;
   width: 80%;
   margin: 18px auto 0;
   transition: all 0.5s ease-in-out;
   position: relative;
+  
 
   .coverText {
     position: absolute;
     color: white;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 30%;
+    text-shadow: 1px 1px 3px black;
 
     > h1 {
       font-size: 3rem;
@@ -114,7 +123,7 @@ export const Cover = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(3, 37, 65, 0.8);
   }
 
   > img {
@@ -130,16 +139,74 @@ export const Cover = styled.div`
     > img {
       height: 50vh;
     }
+
+    .coverText {
+      top: 50%;
+      > h1 {
+        font-size: 2rem;
+        font-family: ${fontFamily.roboto};
+      }
+      > p {
+        font-size: 16px;
+      }
+      > em {
+        font-size: 12px;
+      }
+    }
   }
   @media (max-width: 600px) {
     width: 100%;
     > img {
       height: 25vh;
     }
+    .coverText {
+      top: 50%;
+
+      > h1 {
+        font-size: 1.7rem;
+      }
+      > p {
+        font-size: 10px;
+      }
+      > em {
+        font-size: 7px;
+      }
+    }
+  }
+  @media (max-width: 459px) {
+    .coverText {
+      > h1 {
+        font-size: 1.5rem;
+      }
+    }
   }
 `;
 
 //!HEADER Styles ENDS!!
+
+//*SearchBar
+
+export const SearchBar = styled.div`
+  > input {
+    height: 40px;
+    width: 70%;
+    margin: auto;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 1px 1px 6px 2px grey;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+`;
 
 //*MoviesCard Style Starts
 
@@ -149,7 +216,8 @@ export const MovieWrapper = styled.div`
   align-items: center;
   box-shadow: 1px 1px 13px 2px #f3614010;
   border-radius: 10px;
-  margin-bottom: 2rem;
+  
+  margin:10px ;
   .titleCard {
     border-bottom: 2px solid red;
     margin: 25px;
