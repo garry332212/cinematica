@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { MovieWrapper, TitleCard,MovieCard,MovieInfo,MovieTitle,MovieDate } from "./styles.modules";
+import { MovieWrapper} from "./styles.modules";
 
 interface Movie {
   id: number;
@@ -47,13 +47,13 @@ const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
 
   return (
     <MovieWrapper>
-      <TitleCard>
+      <div className="titleCard">
         <h1>
           {categoryName} <span>{subName}</span>
         </h1>
-      </TitleCard>
+      </div>
 
-      <MovieCard>
+      <div className="movieCard">
         {movies.map((movie) => {
           const percentage = (movie.vote_average / 10) * 100;
           return (
@@ -66,14 +66,14 @@ const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
                 <span>{percentage.toFixed(0)}%</span>
               </div>
 
-              <MovieInfo>
-                <MovieTitle>{movie.title}</MovieTitle>
-                <MovieDate>{getFormattedDate(movie.release_date)}</MovieDate>
-              </MovieInfo>
+              <div className="movieInfo">
+                <h4>{movie.title}</h4>
+                <p>{getFormattedDate(movie.release_date)}</p>
+              </div>
             </div>
           );
         })}
-      </MovieCard>
+      </div>
     </MovieWrapper>
   );
 };
