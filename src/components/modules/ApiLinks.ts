@@ -10,6 +10,8 @@ export const popular = "https://api.themoviedb.org/3/movie/popular";
 
 export const top_rated_movies = "https://api.themoviedb.org/3/movie/top_rated";
 
+export const now_playing = "https://api.themoviedb.org/3/movie/now_playing";
+
 //!TV SHOWS
 
 

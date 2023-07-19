@@ -1,5 +1,5 @@
 import React from "react";
-import { NavbarWrapper } from "./styles.modules";
+import { NavbarWrapper } from "./CSS/styles.modules";
 import {
   AppBar,
   Toolbar,
@@ -29,7 +29,13 @@ const Header = () => {
   return (
     <React.Fragment>
       <NavbarWrapper>
-        <AppBar sx={{padding: "5px", backgroundColor: "#063970", marginBottom:"3rem" }}>
+        <AppBar
+          sx={{
+            padding: "5px",
+            backgroundColor: "#063970",
+            marginBottom: "3rem",
+          }}
+        >
           <Toolbar>
             <Typography className="logo">Cinematica</Typography>
             {isMatching ? (

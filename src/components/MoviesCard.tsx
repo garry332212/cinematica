@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { MovieWrapper} from "./styles.modules";
+import { MovieWrapper } from "./CSS/styles.modules";
 
 interface Movie {
   id: number;
@@ -79,5 +79,3 @@ const Data: React.FC<DataProps> = ({ apiEndpoint, categoryName, subName }) => {
 };
 
 export default Data;
-
-

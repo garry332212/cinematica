@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fontFamily, sizes } from "./modules/themes";
+import { fontFamily, sizes } from "../modules/themes";
 
 export const HomeContainer = styled.div``;
 
@@ -84,6 +84,7 @@ export const NavbarWrapper = styled.div`
     }
   }
 `;
+//!HEADER Styles ENDS!!
 
 //!Cover Image @HomePage
 export const Cover = styled.div`
@@ -181,10 +182,11 @@ export const Cover = styled.div`
   }
 `;
 
-//!HEADER Styles ENDS!!
+//!Cover Image Ends
 
-//*SearchBar
+//*------------------------------*//
 
+//!SearchBar Starts!!
 export const SearchBar = styled.div`
   > input,
   > button {
@@ -220,7 +222,7 @@ export const SearchBar = styled.div`
       width: 80%;
       height: 35px;
       &::placeholder {
-       font-size: 0;
+        font-size: 0;
       }
     }
   }
@@ -244,14 +246,16 @@ export const SearchBar = styled.div`
     @media (max-width: 370px) {
       height: 35px;
       padding: 0 20px;
-      left:80%;
+      left: 80%;
       font-size: 11px;
     }
   }
 `;
+//!SearchBar Ends!!
 
-//*MoviesCard Style Starts
+//*------------------------------*//
 
+//!MoviesCard Style Starts
 export const MovieWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -259,12 +263,11 @@ export const MovieWrapper = styled.div`
   box-shadow: 1px 1px 13px 2px #f3614010;
   border-radius: 10px;
 
-  
   .titleCard {
     border-bottom: 2px solid red;
     margin: 2rem;
     h1 {
-      margin-top:15px;
+      margin-top: 15px;
       font-family: ${fontFamily.Acme};
       > span {
         font-size: ${sizes.medium};
@@ -412,3 +415,5 @@ export const MovieWrapper = styled.div`
 `;
 
 //!MoviesCard Style ENDS!!
+
+//*------------------------------*//

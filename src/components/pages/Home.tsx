@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard";
-import { Cover, HomeContainer, SearchBar } from "../styles.modules";
+import { Cover, HomeContainer, SearchBar } from "../CSS/styles.modules";
 import {
   apiKey,
   popular,
@@ -14,7 +14,7 @@ const Home = () => {
   const [headerImage, setHeaderImage] = useState("");
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`)
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
       .then((response) => response.json())
       .then((data) => {
         const movies = data.results;
@@ -71,6 +71,7 @@ const Home = () => {
         apiEndpoint={`${popular}?api_key=${apiKey}`}
         categoryName="Popular Movies"
       />
+   
       <MoviesCard
         apiEndpoint={`${top_rated_movies}?api_key=${apiKey}`}
         categoryName="Top Rated Movies"
