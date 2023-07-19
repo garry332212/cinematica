@@ -51,6 +51,7 @@ const Home = () => {
             type="search"
             placeholder="Search for movies, Tv shows and more..."
           />
+          <button>Search</button>
         </SearchBar>
       </Cover>
 

@@ -92,7 +92,6 @@ export const Cover = styled.div`
   margin: 18px auto 0;
   transition: all 0.5s ease-in-out;
   position: relative;
-  
 
   .coverText {
     position: absolute;
@@ -187,23 +186,66 @@ export const Cover = styled.div`
 //*SearchBar
 
 export const SearchBar = styled.div`
-  > input {
-    height: 40px;
-    width: 70%;
+  > input,
+  > button {
     margin: auto;
     outline: none;
     border: none;
     border-radius: 20px;
-    box-shadow: 1px 1px 6px 2px grey;
-    padding: 10px;
     position: absolute;
     top: 100%;
-    left: 50%;
-    text-align: center;
     transform: translate(-50%, -50%);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+  }
+  > input {
+    height: 45px;
+    width: 70%;
+    box-shadow: 1px 1px 6px 2px grey;
+    padding: 10px;
+    left: 50%;
     font-size: 22px;
     &::placeholder {
       font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+      width: 80%;
+      &::placeholder {
+        font-size: 9px;
+      }
+    }
+    @media (max-width: 370px) {
+      width: 80%;
+      height: 35px;
+      &::placeholder {
+       font-size: 0;
+      }
+    }
+  }
+
+  > button {
+    height: 46px;
+    padding: 0 25px;
+    left: 82%;
+    font-size: 15px;
+    background: linear-gradient(
+      90deg,
+      rgba(15, 255, 184, 1) 33%,
+      rgba(7, 110, 112, 1) 100%
+    );
+    cursor: pointer;
+    font-weight: bolder;
+    @media (max-width: 600px) {
+      font-size: 13px;
+      padding: 0 26.8px;
+    }
+    @media (max-width: 370px) {
+      height: 35px;
+      padding: 0 20px;
+      left:80%;
+      font-size: 11px;
     }
   }
 `;
@@ -216,13 +258,13 @@ export const MovieWrapper = styled.div`
   align-items: center;
   box-shadow: 1px 1px 13px 2px #f3614010;
   border-radius: 10px;
+
   
-  margin:10px ;
   .titleCard {
     border-bottom: 2px solid red;
-    margin: 25px;
+    margin: 2rem;
     h1 {
-      margin: 2px 10px;
+      margin-top:15px;
       font-family: ${fontFamily.Acme};
       > span {
         font-size: ${sizes.medium};
