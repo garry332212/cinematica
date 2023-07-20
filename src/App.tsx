@@ -22,8 +22,6 @@ function App() {
           <Route path="this_week" element={<ThisWeek />} />
           <Route path="tv_shows" element={<TvShows />} />
         </Routes>
-
-        
       </HomeWrapper>
     </AppWrapper>
   );

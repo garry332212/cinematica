@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieWrapper } from "./CSS/styles.modules";
 
-interface Movie {
+interface TVShow {
+  adult: boolean;
+  backdrop_path: string;
   id: number;
+  name: string;
   overview: string;
-  title: string;
   poster_path: string;
-  original_language: string;
+  first_air_date: string;
   vote_average: number;
-  release_date: string;
+  vote_count: number;
+  origin_country: string[];
 }
 
 interface DataProps {
@@ -18,23 +21,23 @@ interface DataProps {
   subName?: string;
   numberOfMovies: number;
   showButtons?: boolean;
-  movieHeading: string;
+  showHeading: string;
 }
 
-const Data: React.FC<DataProps> = ({
+const ShowCard: React.FC<DataProps> = ({
   apiEndpoint,
   categoryName,
   subName,
   numberOfMovies,
   showButtons = true,
-  movieHeading,
+  showHeading,
 }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [shows, setShows] = useState<TVShow[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchShows = async () => {
       try {
         const response = await axios.get(`${apiEndpoint}`, {
           params: {
@@ -43,23 +46,23 @@ const Data: React.FC<DataProps> = ({
         });
 
         const { results, total_pages } = response.data;
-        setMovies(results.slice(0, numberOfMovies));
+        setShows(results.slice(0, numberOfMovies));
         setTotalPages(total_pages);
       } catch (error) {
-        console.error("Error fetching movies:", error);
+        console.error("Error fetching Shows:", error);
       }
     };
 
-    fetchMovies();
+    fetchShows();
   }, [apiEndpoint, currentPage, numberOfMovies]);
 
-  const nextMoviesPage = () => {
+  const nextShowsPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage((nextPage) => nextPage + 1);
     }
   };
 
-  const prevMoviesPage = () => {
+  const prevShowsPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
@@ -83,34 +86,35 @@ const Data: React.FC<DataProps> = ({
         </h1>
       </div>
       <div className="movieHeading">
-        <h1>{movieHeading}</h1>
+        <h1>{showHeading}</h1>
       </div>
+
       <div className="movieCard">
-        {movies.map((movie) => {
-          const percentage = (movie.vote_average / 10) * 100;
+        {shows.map((shows) => {
+          const percentage = (shows.vote_average / 10) * 100;
 
           return (
-            <div className="movie" key={movie.id}>
+            <div className="movie" key={shows.id}>
               <div className="movieImg">
                 <img
-                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w200/${shows.poster_path}`}
                   alt="Not Found"
                 />
                 <span>{percentage.toFixed(0)}%</span>
               </div>
 
               <div className="movieInfo">
-                <h4>{movie.title}</h4>
-                <p>{getFormattedDate(movie.release_date)}</p>
+                <h4>{shows.name}</h4>
+                <p>{getFormattedDate(shows.first_air_date)}</p>
               </div>
             </div>
           );
         })}
       </div>
-      {showButtons && ( // Check the showButtons prop to conditionally render the buttons
+      {showButtons && (
         <div className="buttons">
           {currentPage > 1 && (
-            <button className="btnPrev" onClick={prevMoviesPage}>
+            <button className="btnPrev" onClick={prevShowsPage}>
               Back
             </button>
           )}
@@ -118,7 +122,7 @@ const Data: React.FC<DataProps> = ({
             Page <b>{currentPage}</b>
           </p>
           {currentPage < totalPages && (
-            <button className="btnNext" onClick={nextMoviesPage}>
+            <button className="btnNext" onClick={nextShowsPage}>
               Next
             </button>
           )}
@@ -128,4 +132,4 @@ const Data: React.FC<DataProps> = ({
   );
 };
 
-export default Data;
+export default ShowCard;

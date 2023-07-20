@@ -7,7 +7,6 @@ const colors = {
   dangerRed: "rgba(255, 20, 20, 0.84)",
   appOrange: "#f76429",
   yellow: "#f7e629",
-  dark: "#000",
 };
 
 const fontFamily = {

@@ -1,19 +1,48 @@
-import { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard";
-import { Cover, HomeContainer, SearchBar } from "../CSS/styles.modules";
+import React from "react";
+import { HomeContainer } from "../CSS/styles.modules";
 import {
   apiKey,
   popular,
-  this_week,
   top_rated_movies,
   trending,
+  trendingShows,
   upcoming,
 } from "../modules/ApiLinks";
 
-const Home = () => {
-  const [headerImage, setHeaderImage] = useState("");
+import CommonStyles from "../CommonStyles";
 
-  useEffect(() => {
+//*Helper Function Types
+interface MovieCategory {
+  apiEndpoint: string;
+  movieHeading: string;
+  numberOfMovies: number;
+  showButtons: boolean;
+}
+
+//*Helper Function
+const createMoviesCard = (
+  apiEndpoint: string,
+  movieHeading: string
+): MovieCategory => ({
+  apiEndpoint: `${apiEndpoint}?api_key=${apiKey}`,
+  movieHeading,
+  numberOfMovies: 16,
+  showButtons: false,
+});
+
+const movieCategories: MovieCategory[] = [
+  createMoviesCard(trending, "Trending"),
+  createMoviesCard(upcoming, "Upcoming Movies"),
+  createMoviesCard(popular, "Popular"),
+  createMoviesCard(top_rated_movies, "Top Rated Movies"),
+];
+
+const Home = () => {
+  const [headerImage, setHeaderImage] = React.useState("");
+
+  //fetch the random images from the endpoint
+  React.useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
       .then((response) => response.json())
       .then((data) => {
@@ -32,50 +61,15 @@ const Home = () => {
   }, []);
   return (
     <HomeContainer>
-      <Cover>
-        <div className="coverText">
-          <h1>Welcome to Cinematica</h1>
-          <p>
-            Explore the World of Cinema: Movie and TV Show Insights at Your
-            Fingertips.
-          </p>
-          <em>
-            "All You Need to Know about Movies and TV Shows: A Comprehensive
-            Resource"
-          </em>
-        </div>
-
-        <img src={headerImage} alt="" />
-        <SearchBar>
-          <input
-            type="search"
-            placeholder="Search for movies, Tv shows and more..."
-          />
-          <button>Search</button>
-        </SearchBar>
-      </Cover>
-
-      <MoviesCard
-        apiEndpoint={`${trending}?api_key=${apiKey}`}
-        categoryName="Trending"
-      />
-      <MoviesCard
-        apiEndpoint={`${upcoming}?api_key=${apiKey}`}
-        categoryName="Upcoming"
-      />
-      <MoviesCard
-        apiEndpoint={`${this_week}?api_key=${apiKey}`}
-        categoryName="This Week"
-      />
-      <MoviesCard
-        apiEndpoint={`${popular}?api_key=${apiKey}`}
-        categoryName="Popular Movies"
-      />
-   
-      <MoviesCard
-        apiEndpoint={`${top_rated_movies}?api_key=${apiKey}`}
-        categoryName="Top Rated Movies"
-        subName="(All Time Hits)"
+      <CommonStyles
+        headerImage={headerImage}
+        title={"Welcome to Cinematica"}
+        description=" Explore the World of Cinema: Movie and TV Show Insights at Your
+        Fingertips."
+        catchyPhrase="All You Need to Know about Movies and TV Shows: A Comprehensive Resource"
+        moviesCardComponent={movieCategories.map((category) => (
+          <MoviesCard key={category.movieHeading} {...category} />
+        ))}
       />
     </HomeContainer>
   );

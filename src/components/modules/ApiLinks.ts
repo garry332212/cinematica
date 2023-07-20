@@ -14,5 +14,12 @@ export const now_playing = "https://api.themoviedb.org/3/movie/now_playing";
 
 //!TV SHOWS
 
+export const trendingShows = "https://api.themoviedb.org/3/trending/tv/week";
 
+export const upcomingShows = "https://api.themoviedb.org/3/tv/upcoming";
 
+// export const this_weekShows = "https://api.themoviedb.org/3/tv/now_playing";
+
+export const popularShows = "https://api.themoviedb.org/3/tv/popular";
+
+export const top_rated_shows = "https://api.themoviedb.org/3/tv/top_rated";

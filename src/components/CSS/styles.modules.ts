@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fontFamily, sizes } from "../modules/themes";
+import { fontFamily, sizes, colors } from "../modules/themes";
 
 export const HomeContainer = styled.div``;
 
@@ -93,6 +93,17 @@ export const Cover = styled.div`
   margin: 18px auto 0;
   transition: all 0.5s ease-in-out;
   position: relative;
+  text-transform: capitalize;
+
+  .custom-cover-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 37, 65, 0.8);
+  }
 
   .coverText {
     position: absolute;
@@ -108,11 +119,15 @@ export const Cover = styled.div`
     text-shadow: 1px 1px 3px black;
 
     > h1 {
-      font-size: 3rem;
+      font-size: 2rem;
       font-family: ${fontFamily.roboto};
     }
     > p {
-      font-size: 24px;
+      font-size: 22px;
+    }
+    > em {
+      font-size: 15px;
+      margin-top: 10px;
     }
   }
 
@@ -127,7 +142,7 @@ export const Cover = styled.div`
   }
 
   > img {
-    height: 500px;
+    height: 370px;
     width: 100%;
     transition: all 0.5s ease-in-out;
   }
@@ -260,15 +275,14 @@ export const MovieWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 1px 1px 13px 2px #f3614010;
   border-radius: 10px;
 
   .titleCard {
-    border-bottom: 2px solid red;
     margin: 2rem;
+    letter-spacing: 2px;
     h1 {
       margin-top: 15px;
-      font-family: ${fontFamily.Acme};
+      font-family: ${fontFamily.roboto};
       > span {
         font-size: ${sizes.medium};
         font-family: ${fontFamily.roboto};
@@ -276,6 +290,16 @@ export const MovieWrapper = styled.div`
       }
     }
   }
+  .movieHeading {
+    width: 100%;
+    > h1 {
+      text-align: left;
+      margin-bottom: 1.5rem;
+      font-family: ${fontFamily.rating};
+      margin-left: 2rem;
+    }
+  }
+
   .movieCard {
     display: flex;
     justify-content: center;
@@ -287,12 +311,14 @@ export const MovieWrapper = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      transition: all 0.3s ease-in-out;
 
       .movieImg {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        cursor: pointer;
 
         > img {
           border-radius: 10px;
@@ -320,6 +346,9 @@ export const MovieWrapper = styled.div`
           position: relative;
           bottom: 20px;
         }
+      }
+      &:hover {
+        transform: scale(1.04);
       }
     }
   }
@@ -409,6 +438,39 @@ export const MovieWrapper = styled.div`
       }
       > p {
         font-size: 14px;
+      }
+    }
+  }
+
+  .buttons {
+    text-align: center;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    margin: 10px 0;
+
+    > p {
+      font-family: ${fontFamily.rating};
+    }
+
+    > .btnPrev,
+    .btnNext {
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 4px 16px;
+      background-color: ${colors.primary};
+      font-family: ${fontFamily.Acme};
+      border-radius: 5px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      &:hover {
+        background-color: ${colors.appOrange};
       }
     }
   }
