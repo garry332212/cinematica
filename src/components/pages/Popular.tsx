@@ -1,36 +1,26 @@
-import DisplayItems from "../DisplayItems";
-import { popular, apiKey, popularShows } from "../modules/ApiLinks";
+import { popular, popularShows } from "../modules/ApiLinks";
 import popularMovies from "../../assets/popular_movies.avif";
-import CommonStyles from "../CommonStyles";
+import RenderMoviesShows from "../RenderMoviesShows";
+import { ItemsCategory, createDisplayItems } from "./Home";
 
 const popularProps = {
-  showButtons: false,
+  headerImage: popularMovies,
   showSearch: true,
   title: "All time blockbusters Movies/Shows ",
   description:
     "Lights, Camera, Action! Exploring the Blockbusters: Unveiling the Magic of Popular Movies/Shows!",
+  catchyPhrase: "see what's popular now!!",
 };
+
+const displayCategories: ItemsCategory[] = [
+  createDisplayItems(popular, "Popular Movies", false, true),
+  createDisplayItems(popularShows, "Trending Shows", true, true),
+];
 const Popular = () => {
   return (
-    <CommonStyles
-      headerImage={popularMovies}
+    <RenderMoviesShows
+      displayCategories={displayCategories}
       {...popularProps}
-      moviesCardComponent={
-        <DisplayItems
-          apiEndpoint={`${popular}?api_key=${apiKey}`}
-          numberOfMovies={16}
-          itemHeading="Popular Movies"
-          moviesOn={true}
-        />
-      }
-      showsCardComponent={
-        <DisplayItems
-          apiEndpoint={`${popularShows}?api_key=${apiKey}`}
-          numberOfMovies={16}
-          itemHeading="Popular Shows"
-          tvShowOn={true}
-        />
-      }
     />
   );
 };

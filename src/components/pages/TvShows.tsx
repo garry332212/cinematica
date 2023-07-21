@@ -1,23 +1,38 @@
-import DisplayItems from "../DisplayItems";
-import { trendingShows, apiKey } from "../modules/ApiLinks";
-import styled from "styled-components";
-import CoverPage from "../CoverPage";
+import {
+  trendingShows,
+  airing_today,
+  top_rated_shows,
+  popularShows,
+  
+} from "../modules/ApiLinks";
 import tvshows from "../../assets/tvshows.avif";
+import RenderMoviesShows from "../RenderMoviesShows";
+import { ItemsCategory, createDisplayItems } from "./Home";
+
+const displayCategories: ItemsCategory[] = [
+  createDisplayItems(trendingShows, "Trending Shows", true, false),
+  createDisplayItems(airing_today, "Watch On Tv 📺", true, false),
+  createDisplayItems(popularShows, "Popular", true, true),
+  createDisplayItems(top_rated_shows, "Top Rated Shows", true, true),
+];
+
+const coverImageProps = {
+  showSearch: false,
+  title: "Enter the TV Show Wonderland",
+  description: "",
+  catchyPhrase: "",
+};
 
 const TvShows = () => {
   return (
-    <TvShowsWrapper>
-      <CoverPage headerImage={tvshows} showSearch={false} />
-      <DisplayItems
-        apiEndpoint={`${trendingShows}?api_key=${apiKey}`}
-        itemHeading={"Trending Shows"}
-        numberOfMovies={16}
-        tvShowOn={true}
+    <>
+      <RenderMoviesShows
+        displayCategories={displayCategories}
+        headerImage={tvshows}
+        {...coverImageProps}
       />
-    </TvShowsWrapper>
+    </>
   );
 };
 
 export default TvShows;
-
-const TvShowsWrapper = styled.div``;

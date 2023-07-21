@@ -18,7 +18,6 @@ export const menuItems = [
   { name: "Home", link: "/" },
   { name: "Now Playing", link: "now_playing" },
   { name: "Popular", link: "popular" },
-  { name: "This Week", link: "this_week" },
   { name: "Tv Shows", link: "tv_shows" },
 ];
 

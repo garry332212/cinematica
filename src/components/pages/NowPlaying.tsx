@@ -1,25 +1,29 @@
-import DisplayItems from "../DisplayItems";
 import { now_playing, trendingShows } from "../modules/ApiLinks";
 import nowPlaying from "../../assets/nowPlaying.jpeg";
-import CommonStyles from "../CommonStyles";
 import { ItemsCategory, createDisplayItems } from "./Home";
+import RenderMoviesShows from "../RenderMoviesShows";
 
 const displayCategories: ItemsCategory[] = [
-  createDisplayItems(now_playing, "Now Playing", false),
-  createDisplayItems(trendingShows, "Trending Shows", true),
+  createDisplayItems(now_playing, "Now Playing", false,false),
+  createDisplayItems(trendingShows, "Now Streaming", true,false),
 ];
+
+const coverImageProps = {
+  headerImage: nowPlaying,
+  showSearch: false,
+  title: "What's Playing Now!",
+  description:
+    "Find the latest movies/shows currently playing",
+  catchyPhrase:
+    "In Cinemas & Streaming Now",
+};
 
 const NowPlaying = () => {
   return (
     <>
-      {/*//! Render Movies & Shows */}
-      <CommonStyles
-        headerImage={nowPlaying}
-        showSearch={false}
-        moviesCardComponent={displayCategories.map((category) => (
-          <DisplayItems key={category.itemHeading} {...category} />
-        ))}
-      />
+     <RenderMoviesShows displayCategories={displayCategories}
+     {...coverImageProps}
+     />
     </>
   );
 };

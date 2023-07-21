@@ -95,16 +95,6 @@ export const Cover = styled.div`
   position: relative;
   text-transform: capitalize;
 
-  .custom-cover-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(3, 37, 65, 0.8);
-  }
-
   .coverText {
     position: absolute;
     color: white;
@@ -121,9 +111,11 @@ export const Cover = styled.div`
     > h1 {
       font-size: 2rem;
       font-family: ${fontFamily.roboto};
+      letter-spacing: 5px;
     }
     > p {
       font-size: 22px;
+      letter-spacing: 1px;
     }
     > em {
       font-size: 15px;
@@ -279,6 +271,29 @@ export const MovieWrapper = styled.div`
   margin-top: 5rem;
   padding: 10px;
   box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.5);
+
+  .loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(3, 37, 65, 0.4);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    color: #fff;
+    z-index: 9999;
+    > p {
+      font-size: 2rem;
+      margin-top: 1rem;
+      letter-spacing: 3px;
+      font-family: ${fontFamily.Acme};
+    }
+  }
   .movieHeading {
     width: 100%;
     > h1 {
@@ -301,6 +316,7 @@ export const MovieWrapper = styled.div`
       justify-content: center;
       align-items: center;
       transition: all 0.3s ease-in-out;
+      margin-bottom: 1.5rem;
 
       .movieImg {
         display: flex;
@@ -404,12 +420,12 @@ export const MovieWrapper = styled.div`
   @media (max-width: 600px) {
     .movieHeading {
       width: auto;
-   > h1 {
-     text-align: center;
-     margin-left: 0;
-     font-size: 25px;
-   }
- }
+      > h1 {
+        text-align: center;
+        margin-left: 0;
+        font-size: 25px;
+      }
+    }
     .movieImg {
       > img {
         padding: 4px;

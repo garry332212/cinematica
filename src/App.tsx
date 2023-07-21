@@ -5,7 +5,6 @@ import Home from "./components/pages/Home";
 import NowPlaying from "./components/pages/NowPlaying";
 import { Route, Routes } from "react-router-dom";
 import Popular from "./components/pages/Popular";
-import ThisWeek from "./components/pages/ThisWeek";
 import TvShows from "./components/pages/TvShows";
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="now_playing" element={<NowPlaying />} />
           <Route path="popular" element={<Popular />} />
-          <Route path="this_week" element={<ThisWeek />} />
           <Route path="tv_shows" element={<TvShows />} />
         </Routes>
       </HomeWrapper>

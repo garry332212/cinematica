@@ -1,4 +1,3 @@
-import DisplayItems from "../DisplayItems";
 import React from "react";
 import { HomeContainer } from "../CSS/styles.modules";
 import {
@@ -8,10 +7,10 @@ import {
   trending,
   trendingShows,
   upcoming,
-  top_rated_shows
+  top_rated_shows,
 } from "../modules/ApiLinks";
 
-import CommonStyles from "../CommonStyles";
+import RenderMoviesShows from "../RenderMoviesShows";
 
 //*Helper Function Types
 export interface ItemsCategory {
@@ -27,25 +26,25 @@ export interface ItemsCategory {
 export const createDisplayItems = (
   apiEndpoint: string,
   itemHeading: string,
-  tvShowOn: boolean // New argument for TV shows
+  tvShowOn: boolean, // New argument for TV shows
+  showButtons: boolean // New argument for showButtons
 ): ItemsCategory => ({
   apiEndpoint: `${apiEndpoint}?api_key=${apiKey}`,
   itemHeading,
   numberOfMovies: 16,
-  showButtons: false,
+  showButtons,
   tvShowOn, // Assign the tvShowOn argument to the object property
   moviesOn: !tvShowOn, // Calculate the moviesOn property based on tvShowOn
 });
 
- const displayCategories: ItemsCategory[] = [
-  createDisplayItems(trending, "Trending", false),
-  createDisplayItems(upcoming, "Upcoming Movies", false),
-  createDisplayItems(popular, "Popular", false),
-  createDisplayItems(top_rated_movies, "Top Rated Movies", false),
-  createDisplayItems(trendingShows, "Trending Shows", true),
-  createDisplayItems(top_rated_shows, "Top Rated Shows", true),
+const displayCategories: ItemsCategory[] = [
+  createDisplayItems(trending, "Trending", false, false),
+  createDisplayItems(upcoming, "Upcoming Movies", false, false),
+  createDisplayItems(popular, "Popular", false, false),
+  createDisplayItems(top_rated_movies, "Top Rated Movies", false, false),
+  createDisplayItems(trendingShows, "Trending Shows", true, false),
+  createDisplayItems(top_rated_shows, "Top Rated Shows", true, false),
 ];
-
 
 const Home = () => {
   const [headerImage, setHeaderImage] = React.useState("");
@@ -68,17 +67,22 @@ const Home = () => {
         console.error(error);
       });
   }, []);
+
+  //For CommonSTYLES props values
+  const coverImageProps = {
+    headerImage: headerImage,
+    showSearch: true,
+    title: "Welcome to Cinematica",
+    description:
+      " Explore the World of Cinema: Movie and TV Show Insights at You Fingertips.",
+    catchyPhrase:
+      "All You Need to Know about Movies and TV Shows: A Comprehensive Resource",
+  };
   return (
     <HomeContainer>
-      <CommonStyles
-        headerImage={headerImage}
-        title={"Welcome to Cinematica"}
-        description=" Explore the World of Cinema: Movie and TV Show Insights at Your
-        Fingertips."
-        catchyPhrase="All You Need to Know about Movies and TV Shows: A Comprehensive Resource"
-        moviesCardComponent={displayCategories.map((category) => (
-          <DisplayItems key={category.itemHeading} {...category}/>
-        ))}
+      <RenderMoviesShows
+        displayCategories={displayCategories}
+        {...coverImageProps}
       />
     </HomeContainer>
   );
