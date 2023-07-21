@@ -10,29 +10,35 @@ interface Movie {
   original_language: string;
   vote_average: number;
   release_date: string;
+
+  //*below for the tv shows
+  name: string;
+  first_air_date: string;
 }
 
 interface DataProps {
   apiEndpoint: string;
-  categoryName?: string;
-  subName?: string;
   numberOfMovies: number;
   showButtons?: boolean;
-  movieHeading: string;
+  tvShowOn?: boolean;
+  moviesOn?: boolean;
+  itemHeading: string;
 }
 
 const Data: React.FC<DataProps> = ({
   apiEndpoint,
-  categoryName,
-  subName,
   numberOfMovies,
   showButtons = true,
-  movieHeading,
+  tvShowOn = false,
+  moviesOn = false,
+  itemHeading,
 }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [showItems, setMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+
+  //* pagination from the API
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -53,13 +59,13 @@ const Data: React.FC<DataProps> = ({
     fetchMovies();
   }, [apiEndpoint, currentPage, numberOfMovies]);
 
-  const nextMoviesPage = () => {
+  const nextItemsPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage((nextPage) => nextPage + 1);
     }
   };
 
-  const prevMoviesPage = () => {
+  const prevItemsPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
@@ -77,40 +83,46 @@ const Data: React.FC<DataProps> = ({
 
   return (
     <MovieWrapper>
-      <div className="titleCard">
-        <h1>
-          {categoryName} <span>{subName}</span>
-        </h1>
-      </div>
       <div className="movieHeading">
-        <h1>{movieHeading}</h1>
+        <h1>{itemHeading}</h1>
       </div>
       <div className="movieCard">
-        {movies.map((movie) => {
-          const percentage = (movie.vote_average / 10) * 100;
+        {showItems.map((items) => {
+          const percentage = (items.vote_average / 10) * 100;
 
           return (
-            <div className="movie" key={movie.id}>
+            <div className="movie" key={items.id}>
               <div className="movieImg">
                 <img
-                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w200/${items.poster_path}`}
                   alt="Not Found"
                 />
                 <span>{percentage.toFixed(0)}%</span>
               </div>
 
               <div className="movieInfo">
-                <h4>{movie.title}</h4>
-                <p>{getFormattedDate(movie.release_date)}</p>
+                {moviesOn && (
+                  <>
+                    <h4>{items.title}</h4>
+                    <p>{getFormattedDate(items.release_date)}</p>
+                  </>
+                )}
+
+                {tvShowOn && (
+                  <>
+                    <h4>{items.name}</h4>
+                    <p>{getFormattedDate(items.first_air_date)}</p>
+                  </>
+                )}
               </div>
             </div>
           );
         })}
       </div>
-      {showButtons && ( // Check the showButtons prop to conditionally render the buttons
+      {showButtons && (
         <div className="buttons">
           {currentPage > 1 && (
-            <button className="btnPrev" onClick={prevMoviesPage}>
+            <button className="btnPrev" onClick={prevItemsPage}>
               Back
             </button>
           )}
@@ -118,7 +130,7 @@ const Data: React.FC<DataProps> = ({
             Page <b>{currentPage}</b>
           </p>
           {currentPage < totalPages && (
-            <button className="btnNext" onClick={nextMoviesPage}>
+            <button className="btnNext" onClick={nextItemsPage}>
               Next
             </button>
           )}

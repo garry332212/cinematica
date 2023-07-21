@@ -1,4 +1,4 @@
-import MoviesCard from "../MoviesCard";
+import DisplayItems from "../DisplayItems";
 import React from "react";
 import { HomeContainer } from "../CSS/styles.modules";
 import {
@@ -8,35 +8,44 @@ import {
   trending,
   trendingShows,
   upcoming,
+  top_rated_shows
 } from "../modules/ApiLinks";
 
 import CommonStyles from "../CommonStyles";
 
 //*Helper Function Types
-interface MovieCategory {
+export interface ItemsCategory {
   apiEndpoint: string;
-  movieHeading: string;
+  itemHeading: string;
   numberOfMovies: number;
   showButtons: boolean;
+  tvShowOn: boolean;
+  moviesOn: boolean;
 }
 
 //*Helper Function
-const createMoviesCard = (
+export const createDisplayItems = (
   apiEndpoint: string,
-  movieHeading: string
-): MovieCategory => ({
+  itemHeading: string,
+  tvShowOn: boolean // New argument for TV shows
+): ItemsCategory => ({
   apiEndpoint: `${apiEndpoint}?api_key=${apiKey}`,
-  movieHeading,
+  itemHeading,
   numberOfMovies: 16,
   showButtons: false,
+  tvShowOn, // Assign the tvShowOn argument to the object property
+  moviesOn: !tvShowOn, // Calculate the moviesOn property based on tvShowOn
 });
 
-const movieCategories: MovieCategory[] = [
-  createMoviesCard(trending, "Trending"),
-  createMoviesCard(upcoming, "Upcoming Movies"),
-  createMoviesCard(popular, "Popular"),
-  createMoviesCard(top_rated_movies, "Top Rated Movies"),
+ const displayCategories: ItemsCategory[] = [
+  createDisplayItems(trending, "Trending", false),
+  createDisplayItems(upcoming, "Upcoming Movies", false),
+  createDisplayItems(popular, "Popular", false),
+  createDisplayItems(top_rated_movies, "Top Rated Movies", false),
+  createDisplayItems(trendingShows, "Trending Shows", true),
+  createDisplayItems(top_rated_shows, "Top Rated Shows", true),
 ];
+
 
 const Home = () => {
   const [headerImage, setHeaderImage] = React.useState("");
@@ -67,8 +76,8 @@ const Home = () => {
         description=" Explore the World of Cinema: Movie and TV Show Insights at Your
         Fingertips."
         catchyPhrase="All You Need to Know about Movies and TV Shows: A Comprehensive Resource"
-        moviesCardComponent={movieCategories.map((category) => (
-          <MoviesCard key={category.movieHeading} {...category} />
+        moviesCardComponent={displayCategories.map((category) => (
+          <DisplayItems key={category.itemHeading} {...category}/>
         ))}
       />
     </HomeContainer>

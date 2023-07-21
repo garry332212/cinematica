@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fontFamily, sizes, colors } from "../modules/themes";
+import { fontFamily, colors } from "../modules/themes";
 
 export const HomeContainer = styled.div``;
 
@@ -276,27 +276,16 @@ export const MovieWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-
-  .titleCard {
-    margin: 2rem;
-    letter-spacing: 2px;
-    h1 {
-      margin-top: 15px;
-      font-family: ${fontFamily.roboto};
-      > span {
-        font-size: ${sizes.medium};
-        font-family: ${fontFamily.roboto};
-        font-weight: 400;
-      }
-    }
-  }
+  margin-top: 5rem;
+  padding: 10px;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.5);
   .movieHeading {
     width: 100%;
     > h1 {
       text-align: left;
       margin-bottom: 1.5rem;
       font-family: ${fontFamily.rating};
-      margin-left: 2rem;
+      margin-left: 3rem;
     }
   }
 
@@ -413,14 +402,14 @@ export const MovieWrapper = styled.div`
   }
 
   @media (max-width: 600px) {
-    .titleCard {
-      h1 {
-        font-size: 25px;
-        > span {
-          font-size: 14px;
-        }
-      }
-    }
+    .movieHeading {
+      width: auto;
+   > h1 {
+     text-align: center;
+     margin-left: 0;
+     font-size: 25px;
+   }
+ }
     .movieImg {
       > img {
         padding: 4px;

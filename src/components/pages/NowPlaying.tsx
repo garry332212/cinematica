@@ -1,34 +1,24 @@
-import MoviesCard from "../MoviesCard";
-import { apiKey, now_playing, trendingShows } from "../modules/ApiLinks";
+import DisplayItems from "../DisplayItems";
+import { now_playing, trendingShows } from "../modules/ApiLinks";
 import nowPlaying from "../../assets/nowPlaying.jpeg";
 import CommonStyles from "../CommonStyles";
-import ShowCard from "../ShowsCard";
+import { ItemsCategory, createDisplayItems } from "./Home";
+
+const displayCategories: ItemsCategory[] = [
+  createDisplayItems(now_playing, "Now Playing", false),
+  createDisplayItems(trendingShows, "Trending Shows", true),
+];
 
 const NowPlaying = () => {
   return (
     <>
+      {/*//! Render Movies & Shows */}
       <CommonStyles
         headerImage={nowPlaying}
         showSearch={false}
-        moviesCardComponent={
-          <MoviesCard
-            apiEndpoint={`${now_playing}?api_key=${apiKey}`}
-            numberOfMovies={16}
-            movieHeading="Now Playing"
-            showButtons={false}
-          />
-        }
-      />
-      <CommonStyles
-        showSearch={false}
-        showHeaderImage={false}
-        showsCardComponent={
-          <ShowCard
-            apiEndpoint={`${trendingShows}?api_key=${apiKey}`}
-            numberOfMovies={16}
-            showHeading="Now Streaming"
-          />
-        }
+        moviesCardComponent={displayCategories.map((category) => (
+          <DisplayItems key={category.itemHeading} {...category} />
+        ))}
       />
     </>
   );

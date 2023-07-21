@@ -1,7 +1,6 @@
-import MoviesCard from "../MoviesCard";
+import DisplayItems from "../DisplayItems";
 import { popular, apiKey, popularShows } from "../modules/ApiLinks";
 import popularMovies from "../../assets/popular_movies.avif";
-import ShowsCard from "../ShowsCard";
 import CommonStyles from "../CommonStyles";
 
 const popularProps = {
@@ -10,7 +9,6 @@ const popularProps = {
   title: "All time blockbusters Movies/Shows ",
   description:
     "Lights, Camera, Action! Exploring the Blockbusters: Unveiling the Magic of Popular Movies/Shows!",
-  
 };
 const Popular = () => {
   return (
@@ -18,18 +16,19 @@ const Popular = () => {
       headerImage={popularMovies}
       {...popularProps}
       moviesCardComponent={
-        <MoviesCard
+        <DisplayItems
           apiEndpoint={`${popular}?api_key=${apiKey}`}
           numberOfMovies={16}
-          movieHeading="Popular Movies"
+          itemHeading="Popular Movies"
+          moviesOn={true}
         />
       }
-      //todo: this can be removed because we are already passing the props so we can sinply use MoviesCard and pass the props we are pasing <ShowCard /> and delete ShowCard
       showsCardComponent={
-        <ShowsCard
+        <DisplayItems
           apiEndpoint={`${popularShows}?api_key=${apiKey}`}
           numberOfMovies={16}
-          showHeading="Popular Shows"
+          itemHeading="Popular Shows"
+          tvShowOn={true}
         />
       }
     />

@@ -18,8 +18,20 @@ export const trendingShows = "https://api.themoviedb.org/3/trending/tv/week";
 
 export const upcomingShows = "https://api.themoviedb.org/3/tv/upcoming";
 
-// export const this_weekShows = "https://api.themoviedb.org/3/tv/now_playing";
-
 export const popularShows = "https://api.themoviedb.org/3/tv/popular";
 
 export const top_rated_shows = "https://api.themoviedb.org/3/tv/top_rated";
+
+
+// interface TVShow {
+//   adult: boolean;
+//   backdrop_path: string;
+//   id: number;
+//   name: string;
+//   overview: string;
+//   poster_path: string;
+//   first_air_date: string;
+//   vote_average: number;
+//   vote_count: number;
+//   origin_country: string[];
+// }

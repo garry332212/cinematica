@@ -1,4 +1,4 @@
-import ShowCard from "../ShowsCard";
+import DisplayItems from "../DisplayItems";
 import { trendingShows, apiKey } from "../modules/ApiLinks";
 import styled from "styled-components";
 import CoverPage from "../CoverPage";
@@ -8,10 +8,11 @@ const TvShows = () => {
   return (
     <TvShowsWrapper>
       <CoverPage headerImage={tvshows} showSearch={false} />
-      <ShowCard
+      <DisplayItems
         apiEndpoint={`${trendingShows}?api_key=${apiKey}`}
-        showHeading={"Trending Shows"}
+        itemHeading={"Trending Shows"}
         numberOfMovies={16}
+        tvShowOn={true}
       />
     </TvShowsWrapper>
   );
