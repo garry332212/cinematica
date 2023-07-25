@@ -37,6 +37,7 @@ export const createDisplayItems = (
   moviesOn: !tvShowOn, // Calculate the moviesOn property based on tvShowOn
 });
 
+//control what to display in RenderMoviesShow component when called in Home.tsx
 const displayCategories: ItemsCategory[] = [
   createDisplayItems(trending, "Trending", false, false),
   createDisplayItems(upcoming, "Upcoming Movies", false, false),
@@ -68,9 +69,10 @@ const Home = () => {
       });
   }, []);
 
-  //For CommonSTYLES props values
+  //RenderMoviesShows props values for Home
   const coverImageProps = {
     headerImage: headerImage,
+    showHeaderImage:true,
     showSearch: true,
     title: "Welcome to Cinematica",
     description:

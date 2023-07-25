@@ -107,15 +107,15 @@ export const Cover = styled.div`
     justify-content: space-evenly;
     height: 30%;
     text-shadow: 1px 1px 3px black;
-
+    letter-spacing: 1px;
+    line-height: 1.5;
+    transition: all 0.5s ease-in-out;
     > h1 {
-      font-size: 2rem;
+      font-size: 3rem;
       font-family: ${fontFamily.roboto};
-      letter-spacing: 5px;
     }
     > p {
-      font-size: 22px;
-      letter-spacing: 1px;
+      font-size: 20px;
     }
     > em {
       font-size: 15px;
@@ -131,30 +131,57 @@ export const Cover = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(3, 37, 65, 0.8);
+    border-bottom-left-radius: 240px;
+    border-bottom-right-radius: 240px;
   }
 
   > img {
     height: 370px;
     width: 100%;
     transition: all 0.5s ease-in-out;
+    border-bottom-left-radius: 240px;
+    border-bottom-right-radius: 240px;
   }
 
   @media (max-width: 1060px) {
     width: 90%;
     margin: auto;
+    &::before,
+    img {
+      border-bottom-left-radius: 100px;
+      border-bottom-right-radius: 100px;
+    }
 
-    > img {
-      height: 50vh;
+    >img{
+      height: 40vh;
     }
 
     .coverText {
-      top: 50%;
+      top: 40%;
       > h1 {
-        font-size: 2rem;
-        font-family: ${fontFamily.roboto};
+        font-size: 2.5rem;
+        line-height: 4;
       }
       > p {
         font-size: 16px;
+      }
+      > em {
+        font-size: 12px;
+      }
+    }
+  }
+  @media (max-width: 800px) {
+    > img {
+      height: 30vh;
+    }
+
+    .coverText {
+      letter-spacing: 0;
+      > h1 {
+        font-size: 1.5rem;
+      }
+      > p {
+        font-size: 14px;
       }
       > em {
         font-size: 12px;
@@ -168,9 +195,11 @@ export const Cover = styled.div`
     }
     .coverText {
       top: 50%;
+  
 
       > h1 {
         font-size: 1.7rem;
+        line-height: 2;
       }
       > p {
         font-size: 10px;
@@ -178,6 +207,10 @@ export const Cover = styled.div`
       > em {
         font-size: 7px;
       }
+    }
+    &::before,
+    img {
+      border-radius: 0;
     }
   }
   @media (max-width: 459px) {

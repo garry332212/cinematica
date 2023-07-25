@@ -1,25 +1,26 @@
 import React from "react";
 import CoverPage from "./CoverPage";
+// import { CoverProps } from "./CoverPage";
 
-interface CoverProps {
-  headerImage?: string;
-  title?: string;
-  description?: string;
-  catchyPhrase?: string;
-  showSearch?: boolean;
-  showHeaderImage?: boolean;
-  moviesCardComponent?: React.ReactNode;
-  showsCardComponent?: React.ReactNode;
+interface CommonStylesProps {
+  headerImage: string;
+  title: string;
+  description: string;
+  catchyPhrase: string;
+  showSearch: boolean;
+  showHeaderImage: boolean;
+  displayCardComponent: React.ReactNode;
+  
 }
-const CommonStyles: React.FC<CoverProps> = ({
+const CommonStyles: React.FC<CommonStylesProps> = ({
   headerImage,
   title,
   description,
   catchyPhrase,
   showSearch,
   showHeaderImage,
-  moviesCardComponent,
-  showsCardComponent,
+  displayCardComponent,
+  
 }) => {
   return (
     <>
@@ -32,9 +33,9 @@ const CommonStyles: React.FC<CoverProps> = ({
         showHeaderImage={showHeaderImage}
       />
 
-      {moviesCardComponent}
+      {displayCardComponent}
 
-      {showsCardComponent}
+      
     </>
   );
 };

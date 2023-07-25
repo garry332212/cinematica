@@ -9,6 +9,7 @@ import tvshows from "../../assets/tvshows.avif";
 import RenderMoviesShows from "../RenderMoviesShows";
 import { ItemsCategory, createDisplayItems } from "./Home";
 
+//control what to display in RenderMoviesShow component when called in TvShows.tsx
 const displayCategories: ItemsCategory[] = [
   createDisplayItems(trendingShows, "Trending Shows", true, false),
   createDisplayItems(airing_today, "Watch On Tv 📺", true, false),
@@ -16,11 +17,14 @@ const displayCategories: ItemsCategory[] = [
   createDisplayItems(top_rated_shows, "Top Rated Shows", true, true),
 ];
 
+ //RenderMoviesShows props values for TvShows
 const coverImageProps = {
   showSearch: false,
+  showHeaderImage:true,
   title: "Enter the TV Show Wonderland",
   description: "",
   catchyPhrase: "",
+
 };
 
 const TvShows = () => {

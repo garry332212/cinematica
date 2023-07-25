@@ -1,12 +1,12 @@
 import React from "react";
 import { Cover, SearchBar } from "./CSS/styles.modules";
 
-interface CoverProps {
-  title?: string;
-  description?: string;
-  catchyPhrase?: string;
-  headerImage?: string;
-  showSearch?: boolean;
+export interface CoverProps {
+  title: string;
+  description: string;
+  catchyPhrase: string;
+  headerImage: string;
+  showSearch: boolean;
   showHeaderImage?: boolean;
 }
 

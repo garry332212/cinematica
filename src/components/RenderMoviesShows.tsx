@@ -6,6 +6,7 @@ interface MoviesCategoriesProps {
   displayCategories: ItemsCategory[]; // Add displayCategories prop
   headerImage: string;
   showSearch: boolean;
+  showHeaderImage:boolean;
   
   title: string;
   description: string;
@@ -15,6 +16,7 @@ interface MoviesCategoriesProps {
 const RenderMoviesShows: React.FC<MoviesCategoriesProps> = ({
   displayCategories,
   headerImage,
+  showHeaderImage,
   title,
   showSearch,
   description,
@@ -22,16 +24,18 @@ const RenderMoviesShows: React.FC<MoviesCategoriesProps> = ({
 }) => {
   const coverProps = {
     showSearch,
+    showHeaderImage,
     title,
     description,
     catchyPhrase,
+    
   };
   return (
     <>
       <CommonStyles
         headerImage={headerImage}
         {...coverProps}
-        moviesCardComponent={displayCategories.map((category) => (
+        displayCardComponent={displayCategories.map((category) => (
           <DisplayItems key={category.itemHeading} {...category} />
         ))}
       />
