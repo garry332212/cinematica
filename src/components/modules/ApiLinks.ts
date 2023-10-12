@@ -1,4 +1,4 @@
-export const apiKey = "a2006311928939b35613c28405038c87";
+export const apiKey = process.env.REACT_APP_API_KEY;
 
 //!Movies
 export const trending = "https://api.themoviedb.org/3/trending/movie/week";
@@ -16,16 +16,3 @@ export const top_rated_shows = "https://api.themoviedb.org/3/tv/top_rated";
 export const airing_today = "https://api.themoviedb.org/3/tv/airing_today";
 
 
-
-// interface TVShow {
-//   adult: boolean;
-//   backdrop_path: string;
-//   id: number;
-//   name: string;
-//   overview: string;
-//   poster_path: string;
-//   first_air_date: string;
-//   vote_average: number;
-//   vote_count: number;
-//   origin_country: string[];
-// }

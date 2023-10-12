@@ -24,7 +24,7 @@ export const NavbarWrapper = styled.div`
     font-family: ${fontFamily.shadowsIntoLight};
     font-size: 3rem;
     letter-spacing: 8px;
-    color: #fff;
+    
     background: linear-gradient(
       to right,
       #eaff00,
@@ -39,6 +39,8 @@ export const NavbarWrapper = styled.div`
     margin-left: auto;
   }
 
+
+  //NavLink Active CLASS
   .navLinks a.active {
     border-radius: 10px;
     border-top: 2px solid red;
@@ -439,7 +441,6 @@ export const MovieWrapper = styled.div`
       .movieImg {
         > img {
           height: 200px;
-          width: 150;
         }
       }
     }

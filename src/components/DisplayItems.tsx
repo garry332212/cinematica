@@ -34,7 +34,7 @@ const Data: React.FC<DataProps> = ({
   moviesOn,
   itemHeading,
 }) => {
-  const [showItems, setMovies] = useState<Movie[]>([]);
+  const [showItems, setShowItems] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -50,7 +50,7 @@ const Data: React.FC<DataProps> = ({
         });
 
         const { results, total_pages } = response.data;
-        setMovies(results.slice(0, numberOfMovies));
+        setShowItems(results.slice(0, numberOfMovies));
         setTotalPages(total_pages);
         setTimeout(() => {
           setLoading(true);
@@ -63,18 +63,20 @@ const Data: React.FC<DataProps> = ({
     fetchMovies();
   }, [apiEndpoint, currentPage, numberOfMovies]);
 
+  //!For Next Paege
   const nextItemsPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage((nextPage) => nextPage + 1);
     }
   };
-
+  //!For Prev Paege
   const prevItemsPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
+  //!Function to change the date format
   function getFormattedDate(dateString: string | number | Date) {
     const options = {
       year: "numeric",
@@ -89,7 +91,7 @@ const Data: React.FC<DataProps> = ({
     <MovieWrapper>
       {!loading ? (
         <div className="loadingOverlay">
-          <CircularProgress size={70} color="warning"/>
+          <CircularProgress size={70} color="warning" />
           <p>Loading</p>
         </div>
       ) : (
